@@ -25,6 +25,8 @@ cd mecab-python-0.996
 python3 setup.py build
 python3 setup.py install
 
+pip3 install mecab-python3
+
 echo "\
 [server]\n\
 headless = true\n\
