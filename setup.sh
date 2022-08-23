@@ -1,6 +1,8 @@
 mkdir -p ~/.streamlit/
 
-curl -s https://raw.githubusercontent.com/teddylee777/machine-learning/master/99-Misc/01-Colab/mecab-colab.sh | bash
+bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
+
+
 
 echo "\
 [server]\n\
