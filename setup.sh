@@ -1,8 +1,7 @@
 mkdir -p ~/.streamlit/
 
+pip install konlpy
 bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
-
-
 
 echo "\
 [server]\n\
