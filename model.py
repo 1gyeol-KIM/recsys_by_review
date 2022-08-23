@@ -12,12 +12,12 @@ def inference_model(input):
     # load positive model
     pos_dict = corpora.Dictionary.load('data/dictionary/pos_dict.imdict')
     pos_corp = corpora.MmCorpus('data/dictionary/pos_corpus')
-    pos_model = LdaModel.load('pos_model')
+    pos_model = LdaModel.load('model/pos_model')
 
     # load negative model
     neg_dict = corpora.Dictionary.load('data/dictionary/neg_dict.imdict')
     neg_corp = corpora.MmCorpus('data/dictionary/neg_corpus')
-    neg_model = LdaModel.load('neg_model')
+    neg_model = LdaModel.load('model/neg_model')
 
     # sample = [
     #     '비싸요 ㅠㅠ 근데 음식은 맛있습니다', '최고예요 재방문 할 겁니다. 존맛 대박 맛있어용',
