@@ -1,3 +1,4 @@
-streamlit
-konlpy
-gensim
+streamlit==1.12.0
+pandas==1.4.2
+gensim==4.1.2
+konlpy==0.6.0
