@@ -1,6 +1,6 @@
 mkdir -p ~/.streamlit/
 
-pip install konlpy
+sudo apt-get install curl
 bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 
 echo "\
