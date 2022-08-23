@@ -7,7 +7,7 @@ import model
 
 st.title("리뷰 기반 맛집 추천 in Seoul")
 
-st.subheader("음식점 리뷰 감성 분석")
+st.subheader("음식점 리뷰 감성 분석하기 (-> 8월 26일 배포 예정")
 
 input = st.text_area(
     label='입력', key='review',
