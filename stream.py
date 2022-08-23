@@ -1,27 +1,56 @@
 import streamlit as st
 import pandas as pd
+import time
+import os
 
-st.title("리뷰 기반 맛집 추천! in Seoul")
+import model
 
-pd.options.display.float_format = '{:.2f}'.format
-df = pd.read_csv('seoul/seoul.csv')
+st.title("리뷰 기반 맛집 추천 in Seoul")
 
+st.subheader("음식점 리뷰 감성 분석")
 
-dong_selected = st.multiselect(
-    '행정동', ['서교동', '종로1.2.3.4가동', '역삼1동']
+input = st.text_area(
+    label='입력', key='review',
+    help="'로 구분해서 입력해주세요. (예시) '리뷰', '리뷰', ..."
     )
 
+if st.button('결과 보기'):
+    input_list = input.split("',")
+    prob_list, processed_review, score_list, total_score_list = model.inference_model(input_list)
 
+    st.write('**Score per Topics**')
+    df = pd.DataFrame(
+        [total_score_list],
+        columns=['서비스', '음식', '장소', '가격']
+    )
+    st.write(df)
+
+    st.write('**raw data**')
+    df_raw = pd.DataFrame({
+        '리뷰':input_list,
+        'prob in topics(서비스, 음식, 장소, 가격)': prob_list,
+        'tokenized': processed_review,
+        'senti score': score_list
+    })
+    df_raw = df_raw.astype(str)
+    st.write(df_raw)
+
+st.write("""
+---
+""")
+
+st.subheader("우리 동네 맛집 리스트")
+
+f_path = 'data/'
+df = pd.read_pickle(os.path.join(f_path, "seoul.pkl"))
+dong_selected = st.multiselect(
+    '동네', ['서교동', '종로1.2.3.4가동', '역삼1동']
+    )
 topic_selected = st.multiselect(
     'Topic', ['음식', '서비스', '가격', '편의성']
     )
 
-# input_user_name = st.text_input(label="User Name", value="default value")
-# radio_gender = st.radio(label="Gender", options=["Male", "Female"])
-# check_1 = st.checkbox(label="agree", value=False)
-# memo = st.text_area(label="memo", value="")
-
-if st.button("Confirm"):
+if st.button("보기"):
     con = st.container()
     con.caption("Result")
     col_dong = []
@@ -36,12 +65,17 @@ if st.button("Confirm"):
     st.write(
         df_res.sort_values(by=col_topic, ascending=False)
         )
-    # st.write(df['음식'].style.format("{:.2}"))
-    # st.dataframe(df['음식'].style.format("{:.2%}"))
-    # st.dataframe(df['가격'].style.format("{:.2%}"))
-    # st.dataframe(df['서비스'].style.format("{:.2%}"))
-    # st.dataframe(df['장소'].style.format("{:.2%}"))
-    # con.write(f"User Name is {str(input_user_name)}")
-    # con.write(str(radio_gender))
-    # con.write(f"agree : {check_1}")
-    # con.write(f"memo : {str(memo)}")
+
+
+
+
+
+# # 입력 값 받기
+# if btn_clicked:
+#     con = st.container()
+#     con.caption("Result")
+#     if not str(input_user_name):
+#         con.error("리뷰데이터를 형식에 맞춰 입력해주세요. ")
+#     else:
+#         # error 안 났을 경우 inference
+#         con.write(f"Hello~ {str(input_user_name)}")
