@@ -13,7 +13,7 @@ def get_nouns(tokenizer, sentence):
 
 
 def tokenize(review):
-    tokenizer = Mecab(dicpath='/usr/local/lib/mecab/dic/mecab-ko-dic')
+    tokenizer = Mecab()
     processed_data = []
     for sent in review:
         sentence = clean_text(sent)
