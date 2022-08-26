@@ -1,5 +1,5 @@
-import preprocessing
-import sentimental
+from src import preprocessing
+from src import sentimental
 
 from gensim import corpora
 from gensim.models.ldamodel import LdaModel
@@ -18,11 +18,6 @@ def inference_model(input):
     neg_dict = corpora.Dictionary.load('data/dictionary/neg_dict.imdict')
     neg_corp = corpora.MmCorpus('data/dictionary/neg_corpus')
     neg_model = LdaModel.load('model/neg_model')
-
-    # sample = [
-    #     '비싸요 ㅠㅠ 근데 음식은 맛있습니다', '최고예요 재방문 할 겁니다. 존맛 대박 맛있어용',
-    #     '쓰레기 같아요. 고성방가 엄청 하고.. 다시는 안와요', '가성비 별로. 맛은 있음'
-    #     ]
 
     # preprocessing (cleaning data & tokenizing data)
     processed_data = preprocessing.tokenize(input)

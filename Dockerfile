@@ -44,8 +44,6 @@ WORKDIR /code/
 # install python packages
 RUN pip install konlpy JPype1
 RUN apt-get -y install curl git
-# RUN apt-get update && \
-#     apt-get install -y 
 RUN cd /code && \
     wget https://bitbucket.org/eunjeon/mecab-ko/downloads/mecab-0.996-ko-0.9.2.tar.gz && \
     tar -zxvf mecab-*-ko-*.tar.gz && \
@@ -72,8 +70,4 @@ RUN cd /code && \
 
 EXPOSE 8080
 
-ENTRYPOINT [ "streamlit", "run", "stream.py", "--server.port", "8080" ]
-# entry
-# ENTRYPOINT ["python"]
-
-# CMD streamlit run --server.port 8080 --server.enableCORS false streamlit.py
+ENTRYPOINT [ "streamlit", "run", "app.py", "--server.port", "8080" ]
