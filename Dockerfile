@@ -44,6 +44,8 @@ WORKDIR /code/
 # install python packages
 RUN pip install konlpy JPype1
 RUN apt-get -y install curl git
+RUN apt-get update && \
+    apt-get install -y automake libtool
 RUN cd /code && \
     wget https://bitbucket.org/eunjeon/mecab-ko/downloads/mecab-0.996-ko-0.9.2.tar.gz && \
     tar -zxvf mecab-*-ko-*.tar.gz && \
